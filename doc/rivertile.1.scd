@@ -62,6 +62,16 @@ These commands may be sent to rivertile at runtime with the help of
 	_value_. Note that the ratio will always be clamped to the range
 	0.1 to 0.9.
 
+*view-padding* _value_
+	Set or modify the view padding. If  _value_ is prefixed by a +/-
+	sign, _value_ is added/subtracted from the current view padding.
+	If there is no sign, the view padding is set to _value_.
+
+*outer-padding* _value_
+	Set or modify the outer padding. If  _value_ is prefixed by a +/-
+	sign, _value_ is added/subtracted from the current outer padding.
+	If there is no sign, the outer padding is set to _value_.
+
 # EXAMPLES
 
 Start *rivertile* with 4 pixels outer padding and the *top* main location:
