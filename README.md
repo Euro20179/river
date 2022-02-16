@@ -22,6 +22,12 @@ low cognitive load.
 - Scriptable configuration and control through a custom Wayland protocol and
 separate `riverctl` binary implementing it.
 
+## Differences from upstream
+
+* `riverctl info`
+* `rivertile view-padding [+-]<num>`
+* `rivertile outer-padding [+-]<num>`
+
 ## Building
 
 <a href="https://repology.org/project/river/versions">
