@@ -69,6 +69,8 @@ const Command = enum {
     @"main-location",
     @"main-count",
     @"main-ratio",
+    @"view-padding",
+    @"outer-padding",
 };
 
 const Location = enum {
@@ -158,6 +160,34 @@ const Output = struct {
                     return;
                 };
                 switch (cmd) {
+                    .@"view-padding" => {
+                        const arg = fmt.parseInt(i32, raw_arg, 10) catch |err| {
+                            std.log.err("failed to parse argument: {}", .{err});
+                            return;
+                        };
+                        switch (raw_arg[0]){
+                            '+' => view_padding +|= @intCast(u32, arg),
+                            '-' => {
+                                const result = @intCast(i32, view_padding) + arg;
+                                if(result >= 0) view_padding = @intCast(u32, result);
+                            },
+                            else => view_padding = @intCast(u32, arg),
+                        }
+                    },
+                    .@"outer-padding" => {
+                        const arg = fmt.parseInt(i32, raw_arg, 10) catch |err| {
+                            std.log.err("failed to parse argument: {}", .{err});
+                            return;
+                        };
+                        switch (raw_arg[0]){
+                            '+' => outer_padding +|= @intCast(u32, arg),
+                            '-' => {
+                                const result = @intCast(i32, outer_padding) + arg;
+                                if(result >= 0) outer_padding = @intCast(u32, result);
+                            },
+                            else => outer_padding = @intCast(u32, arg),
+                        }
+                    },
                     .@"main-location" => {
                         output.main_location = std.meta.stringToEnum(Location, raw_arg) orelse {
                             std.log.err("unknown location: {s}", .{raw_arg});
