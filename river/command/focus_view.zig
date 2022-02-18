@@ -64,8 +64,13 @@ pub fn focusView(
         .next => ViewStack(View).iter(output.views.first, .forward, output.pending.tags, filter),
         .previous => ViewStack(View).iter(output.views.last, .reverse, output.pending.tags, filter),
     };
+    var _view = it.next();
+    if(_view) |view|{
+        seat.cursor.wlr_cursor.x = @intToFloat(f64, view.pending.box.x) + @intToFloat(f64, view.pending.box.width) / 2.0; 
+        seat.cursor.wlr_cursor.y = @intToFloat(f64, view.pending.box.y) + @intToFloat(f64, view.pending.box.height) / 2.0;
+        seat.focus(_view);
+    }
 
-    seat.focus(it.next());
     server.root.startTransaction();
 }
 
